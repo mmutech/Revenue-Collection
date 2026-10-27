@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Account;
+use App\Models\AccountTreatmentType;
 use App\Models\ApprovalWorkflow;
 use App\Models\Bank;
 use App\Models\BankBranch;
@@ -155,11 +156,28 @@ class ReferenceDataSeeder extends Seeder
             ]
         );
 
-        $workflow->stages()->delete();
-        $workflow->stages()->createMany([
+        $stages = [
             ['sequence' => 1, 'name' => 'Supervisor review', 'approver_role' => 'Supervisor', 'permission' => 'treatment.review', 'required_approvals' => 1, 'is_final' => false],
             ['sequence' => 2, 'name' => 'Manager approval', 'approver_role' => 'Manager', 'permission' => 'treatment.approve', 'required_approvals' => 1, 'is_final' => true],
-        ]);
+        ];
+
+        foreach ($stages as $stageDefinition) {
+            $stage = $workflow->stages()
+                ->where('sequence', $stageDefinition['sequence'])
+                ->first();
+
+            if (! $stage) {
+                $workflow->stages()->create($stageDefinition);
+
+                continue;
+            }
+
+            if ($stage->records()->exists() || $stage->treatmentApprovals()->exists()) {
+                continue;
+            }
+
+            $stage->fill($stageDefinition)->save();
+        }
 
         $types = [
             ['code' => 'write_off', 'name' => 'Write-off', 'description' => 'Remove an irrecoverable balance from the active receivable.', 'required_document_types' => ['approval_memo', 'supporting_evidence'], 'sort_order' => 1],
@@ -170,7 +188,7 @@ class ReferenceDataSeeder extends Seeder
         ];
 
         foreach ($types as $type) {
-            $model = \App\Models\AccountTreatmentType::query()->updateOrCreate(
+            $model = AccountTreatmentType::query()->updateOrCreate(
                 ['code' => $type['code']],
                 $type + [
                     'requires_approval' => true,

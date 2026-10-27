@@ -28,16 +28,26 @@ trait Auditable
                 return;
             }
 
-            $changes = $model->getChanges();
-            unset($changes['updated_at']);
+            $allChanges = $model->getChanges();
+            $excluded = method_exists($model, 'auditExcluded')
+                ? $model->auditExcluded()
+                : ['created_at', 'updated_at'];
+            $redactedChanges = array_values(array_diff(
+                array_intersect(array_keys($allChanges), $excluded),
+                ['created_at', 'updated_at']
+            ));
+            $changes = collect($allChanges)->except($excluded)->all();
 
-            if ($changes === []) {
+            if ($changes === [] && $redactedChanges === []) {
                 return;
             }
 
             $old = [];
             foreach (array_keys($changes) as $key) {
                 $old[$key] = $model->getOriginal($key);
+            }
+            if ($redactedChanges !== []) {
+                $changes['redacted_fields_changed'] = $redactedChanges;
             }
 
             AuditLogger::log(

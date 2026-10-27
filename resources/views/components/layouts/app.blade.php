@@ -17,8 +17,8 @@
             :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
         >
             <div class="flex h-16 shrink-0 items-center gap-2.5 border-b border-white/10 px-5">
-                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-mint-500/15 ring-1 ring-mint-500/30">
-                    <x-icon name="shield" class="h-4.5 w-4.5 text-mint-400" />
+                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-navy-500/15 ring-1 ring-navy-500/30">
+                    <x-icon name="shield" class="h-4.5 w-4.5 text-white" />
                 </div>
                 <div class="min-w-0">
                     <p class="truncate text-[13px] font-semibold leading-tight text-white">{{ \App\Support\Setting::string('organisation.short_name', 'Revenue') }}</p>

@@ -28,6 +28,14 @@ class SystemSetting extends Model
         return ['is_public' => 'boolean'];
     }
 
+    /**
+     * @return array<int, string>
+     */
+    public function auditExcluded(): array
+    {
+        return ['value', 'created_at', 'updated_at'];
+    }
+
     public function updatedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');

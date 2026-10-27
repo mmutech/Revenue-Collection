@@ -12,7 +12,7 @@
         <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8" aria-label="Main navigation">
             <a href="{{ url('/') }}" class="flex items-center gap-3" aria-label="{{ config('app.name') }} home">
                 <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-navy-950 ring-1 ring-navy-900">
-                    <x-icon name="shield" class="h-5 w-5 text-mint-400" />
+                    <x-icon name="shield" class="h-5 w-5 text-white" />
                 </span>
                 <span class="min-w-0">
                     <span class="block truncate text-sm font-bold text-slate-950">{{ config('app.name', 'Revenue Collection') }}</span>
@@ -36,19 +36,19 @@
 
     <main>
         <section class="relative isolate overflow-hidden bg-slate-50">
-            <div class="pointer-events-none absolute -right-36 -top-40 -z-10 h-[28rem] w-[28rem] rounded-full bg-mint-500/10 blur-3xl"></div>
+            <div class="pointer-events-none absolute -right-36 -top-40 -z-10 h-[28rem] w-[28rem] rounded-full bg-yellow-500/10 blur-3xl"></div>
             <div class="pointer-events-none absolute -bottom-48 left-1/4 -z-10 h-[28rem] w-[28rem] rounded-full bg-navy-500/10 blur-3xl"></div>
 
             <div class="mx-auto grid max-w-7xl items-center gap-14 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-28">
                 <div>
-                    <div class="inline-flex items-center gap-2 rounded-full border border-mint-500/20 bg-mint-50 px-3 py-1.5 text-xs font-semibold text-mint-700">
-                        <span class="h-1.5 w-1.5 rounded-full bg-mint-500"></span>
+                    <div class="inline-flex items-center gap-2 rounded-full border border-yellow-500/20 bg-yellow-50 px-3 py-1.5 text-xs font-semibold text-yellow-700">
+                        <span class="h-1.5 w-1.5 rounded-full bg-yellow-500"></span>
                         A single workspace for revenue operations
                     </div>
 
                     <h1 class="mt-7 max-w-2xl text-4xl font-semibold leading-[1.08] tracking-tight text-navy-950 sm:text-5xl lg:text-6xl">
                         Every collection.
-                        <span class="text-mint-600">Accounted for.</span>
+                        <span class="text-yellow-600">Accounted for.</span>
                     </h1>
 
                     <p class="mt-6 max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
@@ -73,34 +73,34 @@
                     </div>
 
                     <p class="mt-6 flex items-center gap-2 text-xs leading-5 text-slate-500">
-                        <x-icon name="shield" class="h-4 w-4 shrink-0 text-mint-600" />
+                        <x-icon name="shield" class="h-4 w-4 shrink-0 text-yellow-600" />
                         Staff access is protected by role-based permissions and audited actions.
                     </p>
                 </div>
 
                 <div class="relative mx-auto w-full max-w-xl">
-                    <div class="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-mint-500/10 via-transparent to-navy-500/10 blur-xl"></div>
+                    <div class="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-yellow-500/10 via-transparent to-navy-500/10 blur-xl"></div>
                     <div class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl shadow-navy-950/10">
                         <div class="flex items-center justify-between border-b border-slate-100 px-5 py-4 sm:px-6">
                             <div>
                                 <p class="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Revenue operations</p>
                                 <p class="mt-1 text-sm font-semibold text-slate-900">Collection workflow</p>
                             </div>
-                            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-mint-50 text-mint-700">
+                            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-yellow-50 text-yellow-700">
                                 <x-icon name="refresh" class="h-4.5 w-4.5" />
                             </span>
                         </div>
 
                         <ol class="space-y-3 p-5 sm:p-6">
-                            <li class="flex items-center gap-4 rounded-xl border border-mint-500/20 bg-mint-50/70 p-4">
-                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white text-mint-700 shadow-sm">
+                            <li class="flex items-center gap-4 rounded-xl border border-yellow-500/20 bg-yellow-50/70 p-4">
+                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white text-yellow-700 shadow-sm">
                                     <x-icon name="banknotes" class="h-5 w-5" />
                                 </span>
                                 <span class="min-w-0 flex-1">
                                     <span class="block text-sm font-semibold text-slate-900">Capture payments</span>
                                     <span class="mt-0.5 block text-xs text-slate-600">Record collections by channel</span>
                                 </span>
-                                <x-icon name="check-circle" class="h-5 w-5 shrink-0 text-mint-600" />
+                                <x-icon name="check-circle" class="h-5 w-5 shrink-0 text-yellow-600" />
                             </li>
                             <li class="flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-4">
                                 <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-50 text-navy-700">
@@ -137,7 +137,7 @@
 
         <section id="workflow" class="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
             <div class="max-w-2xl">
-                <p class="text-xs font-bold uppercase tracking-[0.18em] text-mint-700">One connected process</p>
+                <p class="text-xs font-bold uppercase tracking-[0.18em] text-yellow-700">One connected process</p>
                 <h2 class="mt-3 text-2xl font-semibold tracking-tight text-navy-950 sm:text-3xl">Built for accountable collections</h2>
                 <p class="mt-3 text-sm leading-6 text-slate-600 sm:text-base">
                     Bring operational teams and financial controls together, with each step visible to the people responsible for it.
@@ -157,7 +157,7 @@
                     <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-mint-50 text-mint-700">
                         <x-icon name="scale" class="h-5 w-5" />
                     </span>
-                    <h3 class="mt-5 text-sm font-semibold text-slate-900">Review with clear roles</h3>
+                    <h3 class="mt-5 text-sm font-semibold text- -900">Review with clear roles</h3>
                     <p class="mt-2 text-sm leading-6 text-slate-600">Manage batches, exceptions, and approvals with permissions that support separation of duties.</p>
                 </article>
 
