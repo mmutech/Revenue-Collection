@@ -1,0 +1,128 @@
+@import 'tailwindcss';
+
+@source '../../app/**/*.php';
+@source '../../resources/views/**/*.blade.php';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-navy-50: #f2f6fc;
+    --color-navy-100: #e2ebf8;
+    --color-navy-200: #c8d9f0;
+    --color-navy-300: #a1bee4;
+    --color-navy-400: #739cd4;
+    --color-navy-500: #4f7cc5;
+    --color-navy-600: #3c62ac;
+    --color-navy-700: #334f8c;
+    --color-navy-800: #2c4474;
+    --color-navy-900: #263a61;
+    --color-navy-950: #111f38;
+
+    --color-mint-50: #eefbf5;
+    --color-mint-100: #d6f5e8;
+    --color-mint-500: #14a578;
+    --color-mint-600: #0c8a63;
+    --color-mint-700: #0b7053;
+
+    --color-violet-500: #6d4aff;
+    --color-amber-500: #f59e0b;
+}
+
+@layer base {
+    html {
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        @apply bg-slate-100 text-slate-800 antialiased;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+
+    ::selection {
+        @apply bg-navy-200 text-navy-950;
+    }
+
+    .tabular {
+        font-variant-numeric: tabular-nums;
+        letter-spacing: -0.01em;
+    }
+
+    .scrollbar-thin {
+        scrollbar-width: thin;
+        scrollbar-color: #cbd5e1 transparent;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+        @apply rounded-full bg-slate-300;
+    }
+
+    .focus-ring {
+        @apply outline-none focus-visible:ring-2 focus-visible:ring-navy-500 focus-visible:ring-offset-2;
+    }
+}
+
+@layer components {
+    .input-base {
+        @apply block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-xs transition placeholder:text-slate-400 focus:border-navy-500 focus:ring-2 focus:ring-navy-500/20 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-500;
+    }
+
+    .btn-base {
+        @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-semibold shadow-xs transition focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+    }
+
+    .card-surface {
+        @apply rounded-xl border border-slate-200/80 bg-white shadow-sm;
+    }
+
+    .sidebar-link {
+        @apply flex items-center gap-3 rounded-lg px-3 py-2 text-[13px] font-medium text-slate-300/90 transition hover:bg-white/5 hover:text-white;
+    }
+
+    .sidebar-link-active {
+        @apply bg-white/10 text-white shadow-inner;
+    }
+
+    .table-head {
+        @apply bg-slate-50/80 text-[11px] font-semibold uppercase tracking-wider text-slate-500;
+    }
+
+    .table-cell {
+        @apply whitespace-nowrap px-4 py-3 text-sm text-slate-700;
+    }
+}
+
+@media print {
+    .no-print,
+    aside,
+    header.app-header,
+    nav.app-nav {
+        display: none !important;
+    }
+
+    body {
+        background: white !important;
+    }
+
+    .print-area {
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .print-page {
+        width: 100% !important;
+        max-width: none !important;
+    }
+}
