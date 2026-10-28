@@ -23,7 +23,8 @@ class RoutingTest extends TestCase
 
         $this->get(route('login'))
             ->assertOk()
-            ->assertSee('Sign in');
+            ->assertSee('Sign in')
+            ->assertDontSee('Password:');
 
         $this->get(route('password.request'))
             ->assertOk();

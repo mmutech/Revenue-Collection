@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ isset($title) ? $title.' · ' : '' }}{{ config('app.name') }}</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111827'/%3E%3Cpath d='M16 5 7.5 9.25v6c0 4.9 3.36 9.18 8.5 10.375 5.14-1.195 8.5-5.475 8.5-10.375v-6L16 5Z' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='m12.5 15.5 2.75 2.75L19.5 13' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
@@ -17,7 +18,7 @@
             :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
         >
             <div class="flex h-16 shrink-0 items-center gap-2.5 border-b border-white/10 px-5">
-                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-navy-500/15 ring-1 ring-navy-500/30">
+                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-navy-500/15 ring-1 ring-navy-500/30 text-white">
                     <x-icon name="shield" class="h-4.5 w-4.5 text-white" />
                 </div>
                 <div class="min-w-0">

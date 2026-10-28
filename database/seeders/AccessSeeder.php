@@ -31,12 +31,12 @@ class AccessSeeder extends Seeder
         app(PermissionRegistrar::class)->forgetCachedPermissions();
 
         $hq = Branch::query()->where('code', 'HQ')->firstOrFail();
-        $abuja = Branch::query()->where('code', 'ABJ')->firstOrFail();
-        $ph = Branch::query()->where('code', 'PH')->firstOrFail();
+        $jos = Branch::query()->where('code', 'JO')->firstOrFail();
+        $ba = Branch::query()->where('code', 'BA')->firstOrFail();
 
         $hqCash = CollectionPoint::query()->where('code', 'HQ-CASH-01')->first();
         $hqPos = CollectionPoint::query()->where('code', 'HQ-POS-01')->first();
-        $abujaCash = CollectionPoint::query()->where('code', 'ABJ-CASH-01')->first();
+        $josCash = CollectionPoint::query()->where('code', 'JO-CASH-01')->first();
 
         $users = [
             [
@@ -81,8 +81,8 @@ class AccessSeeder extends Seeder
                 'employee_no' => 'EMP-0102',
                 'job_title' => 'Revenue Cashier',
                 'role' => RoleRegistry::CASHIER,
-                'branch_id' => $abuja->id,
-                'collection_point_id' => $abujaCash?->id,
+                'branch_id' => $jos->id,
+                'collection_point_id' => $josCash?->id,
             ],
             [
                 'name' => 'Bola Martins',
@@ -135,25 +135,30 @@ class AccessSeeder extends Seeder
                 'employee_no' => 'EMP-0104',
                 'job_title' => 'Revenue Cashier',
                 'role' => RoleRegistry::CASHIER,
-                'branch_id' => $ph->id,
+                'branch_id' => $ba->id,
                 'collection_point_id' => null,
             ],
         ];
 
         foreach ($users as $definition) {
-            $user = User::query()->updateOrCreate(
-                ['email' => $definition['email']],
-                [
-                    'name' => $definition['name'],
-                    'employee_no' => $definition['employee_no'],
-                    'job_title' => $definition['job_title'],
-                    'branch_id' => $definition['branch_id'],
-                    'collection_point_id' => $definition['collection_point_id'],
-                    'password' => Hash::make('password'),
-                    'is_active' => true,
-                    'email_verified_at' => now(),
-                ]
-            );
+            $user = User::query()->firstOrNew(['email' => $definition['email']]);
+            $needsRandomPassword = ! $user->exists || Hash::check('password', $user->password);
+
+            $user->fill([
+                'name' => $definition['name'],
+                'employee_no' => $definition['employee_no'],
+                'job_title' => $definition['job_title'],
+                'branch_id' => $definition['branch_id'],
+                'collection_point_id' => $definition['collection_point_id'],
+                'is_active' => true,
+                'email_verified_at' => now(),
+            ]);
+
+            if ($needsRandomPassword) {
+                $user->password = Hash::make('password');
+            }
+
+            $user->save();
 
             $user->syncRoles([$definition['role']]);
             $user->branches()->syncWithoutDetaching([$definition['branch_id']]);

@@ -46,12 +46,12 @@ class DemoDataSeeder extends Seeder
         $treasury = User::query()->where('email', 'treasury@example.com')->firstOrFail();
 
         $hq = Branch::query()->where('code', 'HQ')->firstOrFail();
-        $abuja = Branch::query()->where('code', 'ABJ')->firstOrFail();
+        $jos = Branch::query()->where('code', 'JO')->firstOrFail();
 
         $channels = PaymentChannel::query()->pluck('id', 'code');
         $bank = Bank::query()->where('code', 'GTB')->firstOrFail();
         $bankBranch = $bank->bankBranches()->first();
-        $abujaBank = Bank::query()->where('code', 'ZEN')->firstOrFail();
+        $josBank = Bank::query()->where('code', 'ZEN')->firstOrFail();
 
         $today = today()->toDateString();
 
@@ -98,7 +98,7 @@ class DemoDataSeeder extends Seeder
         $payments->create([
             'channel_id' => $channels['aes'],
             'branch_id' => $hq->id,
-            'payer_name' => 'Abuja Health Services',
+            'payer_name' => 'Jos Health Services',
             'amount' => 320000,
             'payment_date' => $today,
             'external_reference' => 'AES-'.strtoupper(uniqid()),
@@ -168,18 +168,18 @@ class DemoDataSeeder extends Seeder
         ]);
 
         // ---------------------------------------------------------------
-        // Cycle 2 (Abuja): submitted batch awaiting clearing verification
+        // Cycle 2 (Jos): submitted batch awaiting clearing verification
         // ---------------------------------------------------------------
         $shiftTwo = $shifts->open($cashier2, [
-            'branch_id' => $abuja->id,
+            'branch_id' => $jos->id,
             'opening_float' => 10000,
-            'notes' => 'Abuja morning shift',
+            'notes' => 'Jos morning shift',
         ]);
 
         $payments->create([
             'channel_id' => $channels['cash'],
-            'branch_id' => $abuja->id,
-            'payer_name' => 'Abuja Health Services',
+            'branch_id' => $jos->id,
+            'payer_name' => 'Jos Health Services',
             'amount' => 96000,
             'payment_date' => $today,
             'notes' => 'Clinic registration fees',
@@ -187,19 +187,19 @@ class DemoDataSeeder extends Seeder
 
         $payments->create([
             'channel_id' => $channels['pos'],
-            'branch_id' => $abuja->id,
+            'branch_id' => $jos->id,
             'payer_name' => 'Zainab Mohammed',
             'amount' => 32000,
             'payment_date' => $today,
             'external_reference' => 'POS-'.strtoupper(uniqid()),
-            'terminal_id' => 'TERM-ABJ-01',
+            'terminal_id' => 'TERM-JOS-01',
             'settlement_date' => $today,
         ], $cashier2);
 
         $summaryTwo = $shifts->summary($shiftTwo);
         $shifts->close($shiftTwo, $cashier2, $summaryTwo['expected'], 'Counted at close.');
 
-        $batchTwo = $batches->create($cashier2, ['branch_id' => $abuja->id, 'shift_id' => $shiftTwo->id]);
+        $batchTwo = $batches->create($cashier2, ['branch_id' => $jos->id, 'shift_id' => $shiftTwo->id]);
         $batches->submit($batchTwo, $cashier2, $batchTwo->expected_total);
 
         // ---------------------------------------------------------------
@@ -241,7 +241,7 @@ class DemoDataSeeder extends Seeder
 
         $pendingLodgement = $lodgements->create($bankOfficer, [
             'branch_id' => $hq->id,
-            'bank_id' => $abujaBank->id,
+            'bank_id' => $josBank->id,
             'deposit_slip_number' => 'SLIP-'.random_int(100000, 999999),
             'deposit_date' => $today,
             'deposited_by_name' => 'Grace Nwosu',

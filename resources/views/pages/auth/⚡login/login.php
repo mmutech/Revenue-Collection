@@ -55,7 +55,7 @@ new #[Layout('components.layouts.guest')]
         }
 
         RateLimiter::clear($key);
-        $this->session()->regenerate();
+        // $this->session()->regenerate();
 
         $user->forceFill(['last_login_at' => now()])->save();
         AuditLogger::log('login', $user, [], [], 'Successful sign-in', 'Authentication', $user);

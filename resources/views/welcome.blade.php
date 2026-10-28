@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="A secure workspace for managing revenue collection, lodgements, reconciliation, and reporting.">
     <title>{{ config('app.name', 'Revenue Collection') }}</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111827'/%3E%3Cpath d='M16 5 7.5 9.25v6c0 4.9 3.36 9.18 8.5 10.375 5.14-1.195 8.5-5.475 8.5-10.375v-6L16 5Z' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='m12.5 15.5 2.75 2.75L19.5 13' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-full bg-white font-sans text-slate-800 antialiased">
     <header class="border-b border-slate-200/80 bg-white">
         <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8" aria-label="Main navigation">
             <a href="{{ url('/') }}" class="flex items-center gap-3" aria-label="{{ config('app.name') }} home">
-                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-navy-950 ring-1 ring-navy-900">
-                    <x-icon name="shield" class="h-5 w-5 text-white" />
+                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-navy-950 ring-1 ring-navy-900 text-white">
+                    <x-icon name="shield" class="h-5 w-5" />
                 </span>
                 <span class="min-w-0">
                     <span class="block truncate text-sm font-bold text-slate-950">{{ config('app.name', 'Revenue Collection') }}</span>
@@ -174,7 +175,7 @@
 
     <footer class="border-t border-slate-200 bg-slate-50">
         <div class="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-8">
-            <span>{{ config('app.name', 'Revenue Collection') }}</span>
+            <span>© {{ now()->format('Y') }} {{ config('app.name', 'Revenue Collection') }}</span>
             <span>Authorised personnel only. Financial actions are recorded for audit.</span>
         </div>
     </footer>

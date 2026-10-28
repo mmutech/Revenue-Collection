@@ -20,9 +20,9 @@ class ReferenceDataSeeder extends Seeder
     public function run(): void
     {
         $branches = [
-            ['code' => 'HQ', 'name' => 'Head Office — Lagos', 'address' => '12 Marina Road, Lagos Island, Lagos', 'phone' => '+234 700 100 0001', 'email' => 'lagos@revenue.example'],
-            ['code' => 'ABJ', 'name' => 'Abuja Regional Office', 'address' => 'Plot 44, Central Business District, Abuja', 'phone' => '+234 700 100 0002', 'email' => 'abuja@revenue.example'],
-            ['code' => 'PH', 'name' => 'Port Harcourt Office', 'address' => '8 Aba Road, Port Harcourt, Rivers', 'phone' => '+234 700 100 0003', 'email' => 'ph@revenue.example'],
+            ['code' => 'HQ', 'name' => 'Head Office — Plateau', 'address' => '12 Marina Road, Jos Island, Jos', 'phone' => '+234 700 100 0001', 'email' => 'jos@revenue.example'],
+            ['code' => 'JO', 'name' => 'Jos State Office', 'address' => 'Plot 44, Central Business District, Jos', 'phone' => '+234 700 100 0002', 'email' => 'jos@revenue.example'],
+            ['code' => 'BA', 'name' => 'Bauchi State Office', 'address' => '8 Aba Road, Bauchi, Rivers', 'phone' => '+234 700 100 0003', 'email' => 'bauchi@revenue.example'],
         ];
 
         foreach ($branches as $branch) {
@@ -35,9 +35,9 @@ class ReferenceDataSeeder extends Seeder
             ['branch' => 'HQ', 'code' => 'HQ-CASH-01', 'name' => 'Head Office Cash Desk', 'type' => 'cashier'],
             ['branch' => 'HQ', 'code' => 'HQ-POS-01', 'name' => 'Head Office POS Terminal', 'type' => 'pos'],
             ['branch' => 'HQ', 'code' => 'HQ-AES-01', 'name' => 'Head Office Electronic Settlement', 'type' => 'electronic'],
-            ['branch' => 'ABJ', 'code' => 'ABJ-CASH-01', 'name' => 'Abuja Cash Desk', 'type' => 'cashier'],
-            ['branch' => 'ABJ', 'code' => 'ABJ-POS-01', 'name' => 'Abuja POS Terminal', 'type' => 'pos'],
-            ['branch' => 'PH', 'code' => 'PH-CASH-01', 'name' => 'Port Harcourt Cash Desk', 'type' => 'cashier'],
+            ['branch' => 'JO', 'code' => 'JO-CASH-01', 'name' => 'Jos Cash Desk', 'type' => 'cashier'],
+            ['branch' => 'JO', 'code' => 'JO-POS-01', 'name' => 'Jos POS Terminal', 'type' => 'pos'],
+            ['branch' => 'BA', 'code' => 'BA-CASH-01', 'name' => 'Bauchi Cash Desk', 'type' => 'cashier'],
         ];
 
         foreach ($points as $point) {
@@ -225,8 +225,8 @@ class ReferenceDataSeeder extends Seeder
         }
 
         $customers = [
-            ['reference' => 'CUS-0001', 'name' => 'Lagos Marine Logistics Ltd', 'type' => 'corporate', 'email' => 'accounts@lagosmarine.example', 'phone' => '+234 803 000 0001'],
-            ['reference' => 'CUS-0002', 'name' => 'Abuja Health Services', 'type' => 'corporate', 'email' => 'finance@abujahealth.example', 'phone' => '+234 803 000 0002'],
+            ['reference' => 'CUS-0001', 'name' => 'Jos Marine Logistics Ltd', 'type' => 'corporate', 'email' => 'accounts@Josmarine.example', 'phone' => '+234 803 000 0001'],
+            ['reference' => 'CUS-0002', 'name' => 'Jos Health Services', 'type' => 'corporate', 'email' => 'finance@Joshealth.example', 'phone' => '+234 803 000 0002'],
             ['reference' => 'CUS-0003', 'name' => 'Adebayo Ogunlesi', 'type' => 'individual', 'email' => 'adebayo@example.com', 'phone' => '+234 803 000 0003'],
             ['reference' => 'CUS-0004', 'name' => 'Rivers Agro Cooperative', 'type' => 'corporate', 'email' => 'coop@riversagro.example', 'phone' => '+234 803 000 0004'],
             ['reference' => 'CUS-0005', 'name' => 'Zainab Mohammed', 'type' => 'individual', 'email' => 'zainab@example.com', 'phone' => '+234 803 000 0005'],
@@ -236,8 +236,8 @@ class ReferenceDataSeeder extends Seeder
             $model = Customer::query()->updateOrCreate(['reference' => $customer['reference']], $customer + ['is_active' => true]);
 
             $accountBranch = match ($model->reference) {
-                'CUS-0002' => $branchMap['ABJ'],
-                'CUS-0004' => $branchMap['PH'],
+                'CUS-0002' => $branchMap['JO'],
+                'CUS-0004' => $branchMap['BA'],
                 default => $branchMap['HQ'],
             };
 

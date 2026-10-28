@@ -106,6 +106,11 @@ class extends Component
             'notes' => ['nullable', 'string', 'max:2000'],
         ]);
 
+        $validated = array_map(
+            fn ($value) => $value === '' ? null : $value,
+            $validated
+        );
+
         if (! auth()->user()->canAccessBranch((int) $this->branch_id)) {
             $this->addError('branch_id', 'You are not authorised for the selected branch.');
 

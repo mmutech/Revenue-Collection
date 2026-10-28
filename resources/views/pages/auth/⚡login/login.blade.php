@@ -36,10 +36,4 @@
             <span wire:loading wire:target="authenticate">Signing in…</span>
         </x-ui.button>
     </form>
-
-    <div class="mt-6 rounded-lg border border-slate-200 bg-white/60 px-3.5 py-3 text-[11px] leading-relaxed text-slate-500">
-        <p class="font-semibold text-slate-600">Demo accounts</p>
-        <p class="mt-1">cashier@example.com · clearing@example.com · treasury@example.com · admin@example.com</p>
-        <p>Password: <span class="font-mono font-semibold text-slate-700">password</span></p>
-    </div>
 </div>
