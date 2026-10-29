@@ -19,11 +19,23 @@
         <x-ui.stat label="Evidence files" :value="$lodgement->documents->count()" icon="document" color="blue" />
         <x-ui.stat
             label="Treasury variance"
-            :value="\App\Support\Money::compact((float) ($lodgement->latestTreasuryVerification?->variance ?? 0))"
-            :hint="$lodgement->latestTreasuryVerification?->decision ? \App\Enums\TreasuryDecision::tryFrom($lodgement->latestTreasuryVerification->decision)?->label() : 'Not yet verified'"
+            :value="\App\Support\Money::compact(
+                (float) ($lodgement->latestTreasuryVerification?->variance ?? 0)
+            )"
+            :hint="match (true) {
+                !$lodgement->latestTreasuryVerification?->decision => 'Not yet verified',
+                $lodgement->latestTreasuryVerification->decision instanceof \App\Enums\TreasuryDecision
+                    => $lodgement->latestTreasuryVerification->decision->label(),
+                default => \App\Enums\TreasuryDecision::tryFrom(
+                    $lodgement->latestTreasuryVerification->decision
+                )?->label() ?? 'Unknown decision',
+            }"
             icon="scale"
-            :color="abs((float) ($lodgement->latestTreasuryVerification?->variance ?? 0)) < 0.01 ? 'mint' : 'rose'"
+            :color="abs((float) ($lodgement->latestTreasuryVerification?->variance ?? 0)) < 0.01
+                ? 'mint'
+                : 'rose'"
         />
+
     </div>
 
     <div class="grid grid-cols-1 gap-6 xl:grid-cols-3">
@@ -148,9 +160,15 @@
                                 <div class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500">
                                     <x-icon name="shield" class="h-3.5 w-3.5" />
                                 </div>
-                                <div class="min-w-0 flex-1">
+                                <div class="min-w-0 flex-1">  
                                     <p class="text-xs font-semibold text-slate-700">
-                                        {{ \App\Enums\TreasuryDecision::tryFrom($verification->decision)?->label() ?? $verification->decision }}
+                                        {{
+                                            $verification->decision instanceof \App\Enums\TreasuryDecision
+                                                ? $verification->decision->label()
+                                                : (\App\Enums\TreasuryDecision::tryFrom($verification->decision ?? '')?->label()
+                                                    ?? $verification->decision
+                                                    ?? 'Unknown')
+                                        }}
                                         · deposited {{ \App\Support\Money::format($verification->deposited_amount) }}
                                         · variance {{ \App\Support\Money::format($verification->variance) }}
                                     </p>

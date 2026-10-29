@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::middleware('guest')->group(function () {
-    Route::livewire('/login', 'pages::auth.login')->name('login');
+    Route::livewire('/', 'pages::auth.login')->name('login');
     Route::livewire('/forgot-password', 'pages::auth.forgot-password')->name('password.request');
     Route::livewire('/reset-password/{token}', 'pages::auth.reset-password')->name('password.reset');
 });

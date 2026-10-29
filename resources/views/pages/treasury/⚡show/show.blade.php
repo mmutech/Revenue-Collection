@@ -108,7 +108,10 @@
                             <li class="px-5 py-3">
                                 <div class="flex items-center justify-between gap-3">
                                     <p class="text-xs font-semibold text-slate-700">
-                                        {{ \App\Enums\TreasuryDecision::tryFrom($verification->decision)?->label() ?? $verification->decision }}
+                                        {{ $verification->decision instanceof \App\Enums\TreasuryDecision
+                                            ? $verification->decision->label()
+                                            : (\App\Enums\TreasuryDecision::tryFrom($verification->decision)?->label() ?? $verification->decision ?? '')
+                                        }}
                                     </p>
                                     <span class="text-[11px] text-slate-400">{{ $verification->verified_at?->format('j M Y H:i') }}</span>
                                 </div>
@@ -167,7 +170,7 @@
                 <x-ui.alert variant="warning" title="Segregation of duties">
                     You created or submitted this lodgement. A different treasury officer must confirm it.
                 </x-ui.alert>
-            @elseif ($lodgement->status === LodgementStatus::UnderTreasuryReview)
+            @elseif ($lodgement->status === \App\Enums\LodgementStatus::UnderTreasuryReview)
                 <x-ui.alert variant="info" title="No confirmation permission">
                     You can review this deposit but cannot record a treasury decision.
                 </x-ui.alert>
